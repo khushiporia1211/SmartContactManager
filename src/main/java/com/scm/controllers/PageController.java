@@ -2,6 +2,7 @@ package com.scm.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -19,5 +20,19 @@ public class PageController {
         return "home";
 
     }
+
+    //about route
+     @RequestMapping("/about")
+     public String aboutPage(){
+        System.out.println("abour page loading");
+        return "about";
+     }
+
+     //service route
+     @RequestMapping("/services")
+     public String servicePage(){
+        System.out.println("service page loading");
+        return "services";
+     }
 
 }
