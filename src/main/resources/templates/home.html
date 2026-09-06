@@ -1,30 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base::parent(~{::#home_content},~{::title},~{::script})}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" th:href="@{/css/output.css}">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+   <title>Home Page</title>
 
-<title>Home Page</title>
-    
 </head>
 <body>
-    <div class="bg-gray-200 w-1/2 p-6  flex flex-col items-center space-y-3 mx-auto mt-4" >
-
-       
-        <h1 class="text-2xl font-bold" data-th-text="${name}"></h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis veniam quod possimus. Quasi voluptates a ipsam, animi quae expedita at pariatur atque aliquid fuga. Quia quos suscipit voluptates quasi id.
-        Odit quo debitis doloremque perferendis enim quidem dolores! Nemo, quasi dignissimos saepe culpa, qui placeat maiores ducimus perferendis officiis, ad rerum iste distinctio quo sint atque voluptates vel dolorum recusandae!
-        Voluptatibus dolore corporis quaerat ut. Facilis hic repellendus sit dolorem exercitationem, dolor voluptatem corrupti, quaerat cupiditate atque veritatis. Iste nisi tempora quidem beatae? Quas officiis incidunt ab deserunt harum inventore.
-        Nobis voluptate vero, tempore nam at laboriosam saepe laudantium dolore impedit non cum unde totam ex consequuntur sint? Explicabo, natus! Modi, atque natus? Praesentium, magnam neque. Reiciendis quae doloremque delectus!
-        es accusantium deserunt. Exercitationem ut est labore perferendis nobis necessitatibus amet rerum odit accusamus sequi id possimus, aut ea veritatis, facere qui asperiores autem doloribus recusandae at voluptatibus?</p>
-    <div>
-        <button class="px-3 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">Click here</button>
-   </div>
+    <div id="home_content" class="">
+        <h1>Welcome to Home page</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, natus!</p>
     </div>
-    
-<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-
+    <script>
+        console.log("Home page")
+    </script>
+    <script>
+        console.log("second home page script")
+    </script>
 </body>
 </html>

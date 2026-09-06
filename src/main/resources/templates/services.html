@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base::parent(~{::#service_content},~{::title},~{::script})}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>service Page</title>
+    <title>Services Page</title>
 </head>
 <body>
-    <h1>service Page</h1>
-    <hr />
-    <!-- using fragment -->
-     <!-- <div class="host_tag" th:insert="~{base :: parent}"> -->
-     <div class="host_tag" th:replace="~{base :: parent('service one','service two')}">
-       
-     </div>
-   
+    <section id="service_content">
+        <h1>Our Services</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, natus!</p>
+        <h2>Services offerend by SCM</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis officia quasi numquam.</p>
+    </section>
+    <script>
+        console.log("service page")
+    </script>
+    <script>
+        console.log("second service page script")
+    </script>
 </body>
 </html>
