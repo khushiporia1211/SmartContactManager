@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="parent(content,title,script)" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title th:replace="${title}">Base Page</title>
+   <link rel="stylesheet" th:href="@{/css/output.css}">
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+      integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+</head>
+
+<body class="bg-gray-100">
+   <!-- common header -->
+   <div data-th-replace="navbar::navbar"></div>
+   <!-- main content -->
+   <div class="p-4">
+      <section data-th-replace="${content}"></section>
+   </div>
+   <!-- common footer -->
+   <!-- <footer class="p-4">
+      Footer: SCM/all rights reserved
+   </footer> -->
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+   <script data-th-src="@{/js/script.js}"></script>
+   <th:block th:replace="${script}"></th:block>
+</body>
+
+</html>

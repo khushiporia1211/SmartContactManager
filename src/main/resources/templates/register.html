@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+    <title>About Page</title>
+
+</head>
+
+<body>
+    <div id="content">
+
+        <div class="grid grid-cols-12">
+            <div class="col-span-4 md:col-span-2 lg:col-span-3 xl:col-span-4"></div>
+            <div class="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-4">
+                <div 
+                    class="bg-neutral-primary-soft block  p-6 border-t-[10px] border-gray-700 bg-white rounded-xl shadow-xs hover:bg-gray-50">
+                    <h5 class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8">Signup Here</h5>
+                    <p class="text-body">Start managing contactson cloud..
+                    </p>
+
+                    <form action="" class="mt-4">
+                        <!-- name -->
+                        <div class="mb-3">
+                            <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
+                            <input type="text" id="name"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="John Doe" required />
+                        </div>
+
+                        <!-- email -->
+                        <div class="mb-3">
+                            <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
+                            <input type="email" id="email"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="name@flowbite.com" required />
+                        </div>
+
+                        <!-- Phone field -->
+                        <div class="mb-5">
+                            <label for="phone" class="block mb-2.5 text-sm font-medium text-heading">Contact
+                                Number</label>
+                            <input type="text" id="phone"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="982XXXXXXX" required />
+                        </div>
+
+                        <!-- password -->
+                        <div class="mb-5">
+                            <label for="password" class="block mb-2.5 text-sm font-medium text-heading">New
+                                Password</label>
+                            <input type="password" id="password"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                        </div>
+
+                        <!-- about -->
+                    <div class="mb-3">
+                        <label for="about" class="block mb-2.5 text-sm font-medium text-heading">Write something about yourself</label>
+                        <textarea id="about" rows="4"
+                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body"
+                            placeholder="Write here..."></textarea>
+                    </div>
+
+                    <!-- buttons -->
+                     <div class="mb-3 flex justify-center space-x-3">
+                        <button class="px-3 py-2 rounded bg-gray-800 text-white hover:bg-gray-700">Signup</button>
+                        <button class="px-3 py-2 rounded bg-gray-500 text-white hover:bg-gray-600">Reset</button>
+                     </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log("Signup Page");
+    </script>
+</body>
+
+</html>
