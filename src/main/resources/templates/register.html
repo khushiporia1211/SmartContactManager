@@ -18,11 +18,16 @@
                     <p class="text-body">Start managing contactson cloud..
                     </p>
 
-                    <form action="" class="mt-4">
+                    <form data-th-action="@{'/do-register'}" 
+                            method="post" 
+                            class="mt-4"
+                            th:object="${userForm}">
                         <!-- name -->
                         <div class="mb-3">
                             <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
-                            <input type="text" id="name"
+                            <input type="text"
+                                     id="name"
+                                     th:field="*{name}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="John Doe" required />
                         </div>
@@ -30,7 +35,9 @@
                         <!-- email -->
                         <div class="mb-3">
                             <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input type="email" id="email"
+                            <input type="email" 
+                            id="email"
+                            th:field="*{email}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="name@flowbite.com" required />
                         </div>
@@ -39,7 +46,9 @@
                         <div class="mb-5">
                             <label for="phone" class="block mb-2.5 text-sm font-medium text-heading">Contact
                                 Number</label>
-                            <input type="text" id="phone"
+                            <input type="text" 
+                                    id="phone"
+                                    th:field="*{phoneNumber}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="982XXXXXXX" required />
                         </div>
@@ -48,22 +57,24 @@
                         <div class="mb-5">
                             <label for="password" class="block mb-2.5 text-sm font-medium text-heading">New
                                 Password</label>
-                            <input type="password" id="password"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                            <input type="password"
+                             id="password "
+                             th:field="*{password}"
+                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
                         </div>
 
                         <!-- about -->
                     <div class="mb-3">
                         <label for="about" class="block mb-2.5 text-sm font-medium text-heading">Write something about yourself</label>
-                        <textarea id="about" rows="4"
+                        <textarea id="about" rows="4" th:field="*{about}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body"
                             placeholder="Write here..."></textarea>
                     </div>
 
                     <!-- buttons -->
                      <div class="mb-3 flex justify-center space-x-3">
-                        <button class="px-3 py-2 rounded bg-gray-800 text-white hover:bg-gray-700">Signup</button>
-                        <button class="px-3 py-2 rounded bg-gray-500 text-white hover:bg-gray-600">Reset</button>
+                        <button type="submit" class="px-3 py-2 rounded bg-gray-800 text-white hover:bg-gray-700">Signup</button>
+                        <button type="reset" class="px-3 py-2 rounded bg-gray-500 text-white hover:bg-gray-600">Reset</button>
                      </div>
 
 
