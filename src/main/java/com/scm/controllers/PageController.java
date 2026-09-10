@@ -2,19 +2,25 @@ package com.scm.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.scm.entities.User;
 import com.scm.forms.UserForm;
+import com.scm.services.UserService;
 
 
 
 
 @Controller
 public class PageController {
+    private final UserService userService;
 
-   
+    PageController(UserService userService) {
+        this.userService = userService;
+    }
+
      @RequestMapping("/home")
     public String home(Model model){
         System.out.println("Home Page Handler");
@@ -44,7 +50,7 @@ public class PageController {
 
         UserForm userForm = new UserForm();
         userForm.setName("khushi");
-        userForm.setAbout("writr something about yourself");
+        userForm.setAbout("write something about yourself");
         model.addAttribute("userForm",userForm);
         return "register";
     }
@@ -56,11 +62,29 @@ public class PageController {
 
     // processing register request
    @RequestMapping(value="/do-register", method=RequestMethod.POST)
-    public String processRegister(Model model){
+    public String processRegister(@ModelAttribute UserForm userForm){
         System.out.println("processing request");
         //fetch form data
+        System.out.println(userForm);
+
+         //save to datebase
+            //Userform---> User
+         User user= User.builder()
+         .name(userForm.getName())
+         .email(userForm.getEmail())
+         .password(userForm.getPassword())
+         .about(userForm.getAbout())
+         .phoneNumber(userForm.getPhoneNumber())
+         .profilePic("https://www.dreamstime.com/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-image360167031")
+         .build();
+         User savedUser = userService.saveUser((user));
+         System.out.println("user saved");
 
         return "redirect:/register";
+
+
+       
+      
     }
 
 }
