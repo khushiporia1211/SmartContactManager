@@ -1,4 +1,4 @@
-package com.scm.services;
+package com.scm.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.scm.entities.User;
 import com.scm.helper.ResourceNotFoundException;
 import com.scm.repositories.UserRepo;
+import com.scm.services.UserService;
 @Service 
 public class UserServiceImpl implements UserService {
 

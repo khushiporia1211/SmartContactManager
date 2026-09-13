@@ -1,5 +1,7 @@
 package com.scm.controllers;
 
+import java.lang.management.MemoryType;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.scm.entities.User;
 import com.scm.forms.UserForm;
+import com.scm.helper.Message;
+import com.scm.helper.MessageType;
 import com.scm.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -62,23 +68,39 @@ public class PageController {
 
     // processing register request
    @RequestMapping(value="/do-register", method=RequestMethod.POST)
-    public String processRegister(@ModelAttribute UserForm userForm){
+    public String processRegister(@ModelAttribute UserForm userForm,HttpSession session){
         System.out.println("processing request");
         //fetch form data
         System.out.println(userForm);
 
          //save to datebase
             //Userform---> User
-         User user= User.builder()
-         .name(userForm.getName())
-         .email(userForm.getEmail())
-         .password(userForm.getPassword())
-         .about(userForm.getAbout())
-         .phoneNumber(userForm.getPhoneNumber())
-         .profilePic("https://www.dreamstime.com/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-image360167031")
-         .build();
+        //  User user= User.builder()
+        //  .name(userForm.getName())
+        //  .email(userForm.getEmail())
+        //  .password(userForm.getPassword())
+        //  .about(userForm.getAbout())
+        //  .phoneNumber(userForm.getPhoneNumber())
+        //  .profilePic("https://www.dreamstime.com/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-image360167031")
+        //  .build();
+
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setProfilePic("https://www.dreamstime.com/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-image360167031");
+
          User savedUser = userService.saveUser((user));
          System.out.println("user saved");
+
+
+         // message = "registration Successfully"
+         // add  the message
+
+        Message message =  Message.builder().content("Registration Successful").type(MessageType.blue).build();
+         session.setAttribute("message",message);
 
         return "redirect:/register";
 
