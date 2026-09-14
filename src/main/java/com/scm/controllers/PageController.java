@@ -1,6 +1,6 @@
 package com.scm.controllers;
 
-import java.lang.management.MemoryType;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,7 +101,7 @@ public class PageController {
         user.setProfilePic("https://www.dreamstime.com/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-image360167031");
 
          User savedUser = userService.saveUser((user));
-         System.out.println("user saved");
+         System.out.println("user saved"+savedUser);
 
 
          // message = "registration Successfully"
