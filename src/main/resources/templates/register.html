@@ -26,7 +26,9 @@
                     <form data-th-action="@{'/do-register'}" 
                             method="post" 
                             class="mt-4"
-                            th:object="${userForm}">
+                            th:object="${userForm}"
+                            novalidate>
+                           
                         <!-- name -->
                         <div class="mb-3">
                             <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
@@ -35,7 +37,13 @@
                                      th:field="*{name}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="John Doe" required />
+                                 <p 
+                                 data-th-if="${#fields.hasErrors('name')}"
+                                 data-th-errors="*{name}"
+                                 class = "text-red-600 py-2 px-1 ">
+                                </p>
                         </div>
+                       
 
                         <!-- email -->
                         <div class="mb-3">
@@ -45,6 +53,11 @@
                             th:field="*{email}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="name@flowbite.com" required />
+                                <p 
+                                 data-th-if="${#fields.hasErrors('email')}"
+                                 data-th-errors="*{email}"
+                                 class = "text-red-600 py-2 px-1 ">
+                                </p>
                         </div>
 
                         <!-- Phone field -->
@@ -56,6 +69,11 @@
                                     th:field="*{phoneNumber}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="982XXXXXXX" required />
+                                <p 
+                                 data-th-if="${#fields.hasErrors('phoneNumber')}"
+                                 data-th-errors="*{phoneNumber}"
+                                 class = "text-red-600 py-2 px-1 ">
+                                </p>
                         </div>
 
                         <!-- password -->
@@ -66,6 +84,11 @@
                              id="password "
                              th:field="*{password}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                            <p 
+                                 data-th-if="${#fields.hasErrors('password')}"
+                                 data-th-errors="*{password}"
+                                 class = "text-red-600 py-2 px-1 ">
+                                </p>
                         </div>
 
                         <!-- about -->
@@ -74,6 +97,11 @@
                         <textarea id="about" rows="4" th:field="*{about}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body"
                             placeholder="Write here..."></textarea>
+                            <p 
+                                 data-th-if="${#fields.hasErrors('about')}"
+                                 data-th-errors="*{about}"
+                                 class = "text-red-600 py-2 px-1 ">
+                                </p>
                     </div>
 
                     <!-- buttons -->
