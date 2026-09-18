@@ -3,11 +3,15 @@ package com.scm.services.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scm.entities.User;
+import com.scm.helper.AppConstants;
 import com.scm.helper.ResourceNotFoundException;
 import com.scm.repositories.UserRepo;
 import com.scm.services.UserService;
@@ -21,12 +25,20 @@ public class UserServiceImpl implements UserService {
     UserServiceImpl(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
+    @Autowired 
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user) {
         //User id:have to generate
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
+        // set the user role
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
         return userRepo.save(user);
         
     }

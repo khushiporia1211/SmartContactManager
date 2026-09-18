@@ -1,11 +1,16 @@
 package com.scm.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+import com.scm.services.impl.SecurityCustomUserDetailService;
 
 
 
@@ -30,12 +35,24 @@ public class SecurityConfig {
     //     var inMemoryUserDetailsManager =  new InMemoryUserDetailsManager(user1);
     //     return inMemoryUserDetailsManager;
     // }
+    @Autowired 
+    private SecurityCustomUserDetailService userDetailService;
+
+    //Configuration of authentication provider for spring security
     @Bean 
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(null);
-        daoAuthenticationProvider.setUserDetailsService(null);
-        daoAuthenticationProvider.setPasswordEncoder(null);
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(userDetailService);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
+    }
+
+    @Bean 
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
+        //Configuration
+
+        httpSecurity.authorizeHttpRequests(null)
+        return httpSecurity.build();
+
     }
     
     @Bean 
