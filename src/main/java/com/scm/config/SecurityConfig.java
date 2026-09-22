@@ -3,8 +3,8 @@ package com.scm.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,7 +50,29 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         //Configuration
 
-        httpSecurity.authorizeHttpRequests(null)
+        //url ko configure kiya h ki koun se public rahenge aur kon se private rahenge
+        httpSecurity.authorizeHttpRequests(authorize ->{
+            // authorize.requestMatchers("/home","/register","/services").permitAll();
+            authorize.requestMatchers("/user/**").authenticated();
+            authorize.anyRequest().permitAll();
+        });
+        //form default login
+        // httpSecurity.formLogin(Customizer.withDefaults());
+        httpSecurity.formLogin(formLogin->{
+
+            formLogin.loginPage("/login");
+            formLogin.loginProcessingUrl("/authenticate");
+            formLogin.defaultSuccessUrl("/user/dashboard", true);
+            formLogin.failureUrl("/login?error=true");
+            formLogin.usernameParameter("email");
+            formLogin.passwordParameter("password");
+            // formLogin.successForwardUrl(null)
+            
+        });
+
+        httpSecurity.logout(logoutForm->{
+            logoutForm.logoutUrl("/logout");
+        });
         return httpSecurity.build();
 
     }

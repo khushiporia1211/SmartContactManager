@@ -70,7 +70,7 @@ public class User implements UserDetails{
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // List of roles{USER,ADMIN,}
         //converted to collection of SimpleGrantedAuthority[roles[ADMIN,USER]]
-        Collection<SimpleGrantedAuthority> roles = roleList.stream().map(role-> new SimpleGrantedAuthority(role)).collect(Collectors.toCollection(null));
+        Collection<SimpleGrantedAuthority> roles = roleList.stream().map(role-> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
         return roles;
         
     }
