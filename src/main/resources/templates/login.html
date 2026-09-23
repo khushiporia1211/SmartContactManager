@@ -20,6 +20,13 @@
                     <p class="text-body">Start managing contactson cloud..
                     </p>
 
+                    <div class= "text-red-600 text-center my-3" th:if="${param.error}">
+                        Invalid username or password.
+                         </div>
+                         <div class="text-green-600 text-center my-3" th:if="${param.logout}">
+                            You have been logged out.
+                         </div>
+
                     <form
                           method="post"
                             data-th-action="@{/authenticate}"
