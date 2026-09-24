@@ -76,6 +76,9 @@ public class SecurityConfig {
             logoutForm.logoutUrl("/logout");
             logoutForm.logoutSuccessUrl("/login?logout=true");
         });
+
+        // oauth configurations
+        httpSecurity.oauth2Login(Customizer.withDefaults());
         return httpSecurity.build();
 
     }
