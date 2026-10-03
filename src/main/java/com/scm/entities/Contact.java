@@ -36,7 +36,7 @@ public class Contact {
     private String description;
     private boolean favourite=false;
     private String websiteLink;
-    private String linkedInList;
+    private String linkedInLink;
 
     //private List<String> socialLink=new ArrayList<>()
     @ManyToOne 
