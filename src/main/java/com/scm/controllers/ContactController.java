@@ -18,6 +18,7 @@ import com.scm.helper.Helper;
 import com.scm.helper.Message;
 import com.scm.helper.MessageType;
 import com.scm.services.ContactService;
+import com.scm.services.ImageService;
 import com.scm.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,16 +29,19 @@ import jakarta.validation.Valid;
 @Controller 
 @RequestMapping("/user/contacts")
 public class ContactController {
+
+    private final ImageService imageService;
     
     private final  UserService userService;
     private final ContactService contactService;
 
-    ContactController(ContactService contactService, UserService userService) {
+    ContactController(ContactService contactService, UserService userService,ImageService imageService) {
         this.contactService = contactService;
         this.userService = userService;
+        this.imageService=imageService;
     }
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(ContactController.class);
 
     //add contact page handler
     @RequestMapping("/add")
@@ -56,7 +60,7 @@ public class ContactController {
        User user =  userService.getUserByEmail(username);
 
        //image process
-       logger.info("file information : ()",contactForm.getContactImage().getOriginalFilename());
+       logger.info("file information : {}",contactForm.getContactImage().getOriginalFilename());
 
        //validate the form
        if(result.hasErrors()){
@@ -66,8 +70,9 @@ public class ContactController {
         .build());
         return "user/add_contact";
        }
-
-       //process the contact picture
+       //image uplaod process
+       String fileURL = imageService.uploadImage(contactForm.getContactImage());
+       
 
        
 
@@ -81,10 +86,11 @@ public class ContactController {
         contact.setLinkedInLink(contactForm.getLinkedInLink()); 
         contact.setWebsiteLink(contactForm.getWebsiteLink()); 
         contact.setUser(user);
+        contact.setPicture(fileURL);
 
 
         //process the form data
-        // contactService.save(contact);
+        contactService.save(contact);
         System.out.println(contactForm);
 
         //set the contact picture to the user
