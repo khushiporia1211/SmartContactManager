@@ -60,7 +60,11 @@ public class ContactController {
        User user =  userService.getUserByEmail(username);
 
        //image process
-       logger.info("file information : {}",contactForm.getContactImage().getOriginalFilename());
+      if (contactForm.getContactImage() != null
+        && !contactForm.getContactImage().isEmpty()) {
+    logger.info("Uploaded original filename: {}",
+            contactForm.getContactImage().getOriginalFilename());
+}
 
        //validate the form
        if(result.hasErrors()){
@@ -81,6 +85,7 @@ public class ContactController {
         contact.setFavourite(contactForm.isFavourite()); 
         contact.setEmail(contactForm.getEmail()); 
         contact.setPhoneNumber(contactForm.getPhoneNumber()); 
+        
         contact.setAddress(contactForm.getAddress()); 
         contact.setDescription(contactForm.getDescription()); 
         contact.setLinkedInLink(contactForm.getLinkedInLink()); 

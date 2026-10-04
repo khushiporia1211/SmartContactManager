@@ -28,7 +28,7 @@ public class AppConfig {
 
             ObjectUtils.asMap(
                 "cloud_name",cloudName,
-                "api-key",apiKey,
+                "api_key",apiKey,
                 "api_secret",apiSecret)
         );
     }
