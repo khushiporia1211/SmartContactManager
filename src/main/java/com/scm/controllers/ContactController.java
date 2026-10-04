@@ -1,6 +1,8 @@
 package com.scm.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +15,12 @@ import com.scm.entities.Contact;
 import com.scm.entities.User;
 import com.scm.forms.ContactForm;
 import com.scm.helper.Helper;
+import com.scm.helper.Message;
+import com.scm.helper.MessageType;
 import com.scm.services.ContactService;
 import com.scm.services.UserService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 
@@ -32,6 +37,8 @@ public class ContactController {
         this.userService = userService;
     }
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     //add contact page handler
     @RequestMapping("/add")
     public String addContactView(Model model){
@@ -42,13 +49,21 @@ public class ContactController {
     }
 
     @RequestMapping(value="/add",method=RequestMethod.POST)
-    public String saveContact(@Valid  @ModelAttribute ContactForm contactForm,BindingResult result,Authentication authentication){
+    public String saveContact(@Valid  @ModelAttribute ContactForm contactForm,BindingResult result,Authentication authentication,HttpSession session){
         // form --> contact
         String username = Helper.getEmailOfLoggedInUser(authentication);
 
        User user =  userService.getUserByEmail(username);
+
+       //image process
+       logger.info("file information : ()",contactForm.getContactImage().getOriginalFilename());
+
        //validate the form
        if(result.hasErrors()){
+        session.setAttribute("message", Message.builder()
+        .content("please correct the following errors")
+        .type(MessageType.red)
+        .build());
         return "user/add_contact";
        }
 
@@ -69,13 +84,16 @@ public class ContactController {
 
 
         //process the form data
-        contactService.save(contact);
+        // contactService.save(contact);
         System.out.println(contactForm);
 
         //set the contact picture to the user
 
         //set message to be displayed on the view 
-
+       session.setAttribute("message",Message.builder()
+                                    .content("You have Successfully added a new content")
+                                    .type(MessageType.green)
+                                    .build() );
         return "redirect:/user/contacts/add";
     }
 }

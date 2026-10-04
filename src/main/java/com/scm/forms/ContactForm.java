@@ -22,6 +22,7 @@ public class ContactForm {
     @NotBlank(message="Name is required")
     private String name;
 
+    @NotBlank(message = "Email is required [example@gmail.com]")
     @Email(message = "Invalid Email Address")
     private String email;
 
@@ -40,6 +41,10 @@ public class ContactForm {
 
     private String linkedInLink;
 
-    private MultipartFile profileImage;
+    //annotation create krenge jo file ko validate kregi
+    //size
+    //resolution
+    //type
+    private MultipartFile contactImage;
 
 }

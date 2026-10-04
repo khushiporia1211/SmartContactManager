@@ -19,6 +19,9 @@
                 <div class="sm:col-span-12 md:col-span-6">
                     <div
                         class=" card bg-white block p-6 border border-gray-300 rounded-lg shadow-xs hover:bg-neutral-secondary-medium">
+                        
+                        <div data-th-replace="message::messagebox"></div>
+                        
                         <h1 class="text-3xl font-semibold">Add New Contact</h1>
                         <p class="text-grey-500">This contact will be stored on cloud , you can direct email this client
                             from scm</p>
@@ -26,12 +29,14 @@
                             <form data-th-action="@{'/user/contacts/add'}" 
                                     class="mt-8"
                                     method="post"
-                                    data-th-object="${contactForm}">
-
+                                    data-th-object="${contactForm}"
+                                    enctype="multipart/form-data">
+                              
+                                    <!-- // Name of the contact -->
 
                                 <div class="mb-3">
                                 <label for="input-group-1" class="block mb-2.5 text-sm font-medium text-heading">Contact Name</label>
-                       <div class="relative">
+                       <div class="relative mb-1">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <i class="fa-regular fa-user w-4 h-4"></i>
                             </div>
@@ -39,21 +44,28 @@
                             type="text" 
                                 class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium rounded-lg  border border-gray-300  text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                                 placeholder="name">
+                                
                         </div>
+                        <p data-th-if="${#fields.hasErrors('name')}"
+                            data-th-errors="*{name}"
+                            class="text-red-500"></p>
                             </div>
 
                             <!-- email -->
                             <div class="mb-3">
                                 <label for="input-group-1" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                       <div class="relative">
+                       <div class="relative" mb-1>
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <i class="fa-regular fa-envelope w-4 h-4"></i>
                             </div>
                             <input data-th-field="*{email}"
-                            type="text" 
+                                    type="text" 
                                 class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium rounded-lg  border border-gray-300  text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                                 placeholder="john@gmail.com">
                         </div>
+                        <p data-th-if="${#fields.hasErrors('email')}"
+                            data-th-errors="*{email}"
+                            class="text-red-500"></p>
                             </div>
                             <!-- phone number -->
                             <div class="mb-3">
@@ -67,6 +79,9 @@
                                 class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium rounded-lg  border border-gray-300  text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                                 placeholder="9876XXXXXX">
                         </div>
+                        <p data-th-if="${#fields.hasErrors('phoneNumber')}"
+                            data-th-errors="*{phoneNumber}"
+                            class="text-red-500"></p>
                             </div>
 
                             <!-- Address  -->
@@ -116,7 +131,10 @@
                                 <!-- profile picture -->
                                 <div class="mb-5">
                                     <label class="block mb-2.5 text-sm font-medium text-heading" for="small_size">Contact Image</label>
-                                    <input class="cursor-pointer bg-neutral-secondary-medium border border-gray-300 rounded-lg   text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body" id="small_size" type="file">
+                                    <input data-th-field="*{contactImage}" 
+                                    class="cursor-pointer bg-neutral-secondary-medium border border-gray-300 rounded-lg   text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body" 
+                                    id="small_size" 
+                                    type="file">
 
                                 </div>
 
