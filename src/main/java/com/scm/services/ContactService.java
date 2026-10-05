@@ -3,7 +3,7 @@ package com.scm.services;
 import java.util.List;
 
 import com.scm.entities.Contact;
-import com.scm.entities.User;
+
 
 public interface ContactService {
     // save contact
