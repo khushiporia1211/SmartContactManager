@@ -37,6 +37,7 @@ public class Contact {
     private boolean favourite=false;
     private String websiteLink;
     private String linkedInLink;
+    private String cloundinaryImagePublicId;
 
     //private List<String> socialLink=new ArrayList<>()
     @ManyToOne 

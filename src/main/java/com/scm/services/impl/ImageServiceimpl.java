@@ -20,12 +20,12 @@ public class ImageServiceimpl implements ImageService {
     }
 
     @Override
-    public String uploadImage(MultipartFile contactImage) {
+    public String uploadImage(MultipartFile contactImage,String publicId) {
         if (contactImage == null || contactImage.isEmpty()) {
             throw new IllegalArgumentException("An image file is required.");
         }
 
-        String publicId = UUID.randomUUID().toString();
+       
         try {
             cloudinary.uploader().upload(
                 contactImage.getBytes(),

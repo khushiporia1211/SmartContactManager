@@ -1,5 +1,7 @@
 package com.scm.controllers;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,8 +76,10 @@ public class ContactController {
         .build());
         return "user/add_contact";
        }
+
+       String publicId = UUID.randomUUID().toString();
        //image uplaod process
-       String fileURL = imageService.uploadImage(contactForm.getContactImage());
+       String fileURL = imageService.uploadImage(contactForm.getContactImage(),publicId);
        
 
        
@@ -92,6 +96,7 @@ public class ContactController {
         contact.setWebsiteLink(contactForm.getWebsiteLink()); 
         contact.setUser(user);
         contact.setPicture(fileURL);
+        contact.setCloundinaryImagePublicId(publicId);
 
 
         //process the form data

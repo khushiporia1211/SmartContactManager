@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::#pageScripts})}">
 
 <head>
     <title>Add Contact</title>
@@ -20,7 +20,7 @@
                     <div
                         class=" card bg-white block p-6 border border-gray-300 rounded-lg shadow-xs hover:bg-neutral-secondary-medium">
                         
-                        <div data-th-replace="message::messagebox"></div>
+                        <div data-th-replace="~{message::messagebox}"></div>
                         
                         <h1 class="text-3xl font-semibold">Add New Contact</h1>
                         <p class="text-grey-500">This contact will be stored on cloud , you can direct email this client
@@ -133,9 +133,9 @@
                                     <label class="block mb-2.5 text-sm font-medium text-heading" for="small_size">Contact Image</label>
                                     <input data-th-field="*{contactImage}" 
                                     class="cursor-pointer bg-neutral-secondary-medium border border-gray-300 rounded-lg   text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body" 
-                                    id="small_size" 
+                                    id="image_file_input" 
                                     type="file">
-
+                                    <img class="max-h-52 mx-auto rounded-lg shadow m-3" src="" id="upload_image_preview" alt="">
                                 </div>
 
                                 <!-- //favourite checkbox -->
@@ -157,9 +157,12 @@
             </div>
         </div>
     </div>
-    <script>
-        console.log("this is a profile page")
-    </script>
+    <th:block id="pageScripts">
+        <script data-th-src="@{/js/admin.js}"></script>
+        <script>
+            console.log("this is a contact page")
+        </script>
+    </th:block>
 </body>
 
 </html>
