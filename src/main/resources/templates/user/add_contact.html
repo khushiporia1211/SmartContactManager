@@ -129,13 +129,17 @@
                                 </div>
                               </div>
                                 <!-- profile picture -->
-                                <div class="mb-5">
+                                <div class="mb-2">
                                     <label class="block mb-2.5 text-sm font-medium text-heading" for="small_size">Contact Image</label>
                                     <input data-th-field="*{contactImage}" 
                                     class="cursor-pointer bg-neutral-secondary-medium border border-gray-300 rounded-lg   text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body" 
                                     id="image_file_input" 
                                     type="file">
                                     <img class="max-h-52 mx-auto rounded-lg shadow m-3" src="" id="upload_image_preview" alt="">
+                                    
+                                    <p data-th-if="${#fields.hasErrors('contactImage')}"
+                            data-th-errors="*{contactImage}"
+                            class="text-red-500"></p>
                                 </div>
 
                                 <!-- //favourite checkbox -->
