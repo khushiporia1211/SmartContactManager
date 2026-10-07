@@ -112,4 +112,11 @@ public class ContactController {
                                     .build() );
         return "redirect:/user/contacts/add";
     }
+
+    //view contacts
+    @RequestMapping()
+    public String viewContacts(){
+        return "user/contacts";
+
+    }
 }
