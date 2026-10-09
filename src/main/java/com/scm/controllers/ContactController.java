@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.scm.entities.Contact;
 import com.scm.entities.User;
 import com.scm.forms.ContactForm;
+import com.scm.helper.AppConstants;
 import com.scm.helper.Helper;
 import com.scm.helper.Message;
 import com.scm.helper.MessageType;
@@ -130,6 +131,7 @@ public class ContactController {
         Page<Contact> contacts = contactService.getByUser(user,page,size,sortBy,direction);
 
         model.addAttribute("contacts",contacts);
+        model.addAttribute("pageSize",AppConstants.PAGE_SIZE);
         return "user/contacts";
 
     }
