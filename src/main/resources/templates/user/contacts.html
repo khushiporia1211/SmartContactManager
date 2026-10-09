@@ -98,7 +98,7 @@
                             <tbody>
                                 <tr
                                     data-th-object="${c}"
-                                    data-th-each="c : ${contacts}"
+                                    data-th-each="c : ${contacts.content}"
                                     class=" border-b border-default hover:bg-neutral-secondary-medium">
                                     
                                     <th scope="row" class="flex items-center px-6 py-4 text-heading whitespace-nowrap">
@@ -111,16 +111,44 @@
                                             <div class="font-normal text-body" data-th-text="*{email}">neil.sims@flowbite.com</div>
                                         </div>
                                     </th>
-                                    <td class="px-6 py-4" data-th-text="*{phoneNumber}">
-                                        React Developer
+                                    <td class="px-6 py-4">
+                                        <i class="fa-solid fa-phone w-4 h-4"></i>
+                                        <span  data-th-text="*{phoneNumber}"></span>
+                                        
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <div class="h-2.5 w-2.5 rounded-full bg-success me-2"></div> Online
+                                            <div 
+                                                data-th-if="*{favourite}"
+                                                class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> 
+                                            
+                                            <a data-th-href="@{*{websiteLink}}" 
+                                                target="_blank">
+                                                <i class="w-6 h-6 fa-solid fa-link"></i>
+                                            </a>
+                                        
+                                            
+                                            <a data-th-href="@{*{linkedInLink}}" 
+                                                target="_blank">
+                                                <i class="w-6 h-6 fa-brands fa-linkedin"></i>
+                                            </a>
+                                        
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-fg-brand hover:underline">Edit user</a>
+                                    <td>
+                                    <div>
+                                        <a class="p-2 ">
+                                             <i class="w-6 h-6 fa-solid fa-trash"></i>
+                                        </a>
+                                       
+                                        <a class="p-2 ">
+                                            <i class="w-6 h-6 fa-solid fa-pen"></i>
+                                        </a>
+                                        
+                                        <a class="p-2 ">
+                                            <i class="w-6 h-6 fa-regular fa-eye"></i>
+                                        </a>
+                                    </div>
                                     </td>
                                 </tr>
                                 

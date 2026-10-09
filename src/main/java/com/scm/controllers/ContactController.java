@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.scm.entities.Contact;
 import com.scm.entities.User;
@@ -116,12 +117,17 @@ public class ContactController {
 
     //view contacts
     @RequestMapping()
-    public String viewContacts(Model model,Authentication authentication){
+    public String viewContacts(@RequestParam(value = "page",defaultValue = "0") int page,
+                                @RequestParam(value = "size",defaultValue = "10") int size,
+                                @RequestParam(value = "sortBy",defaultValue = "name") String sortBy,
+                                @RequestParam(value = "direction",defaultValue = "asc") String direction, 
+                                Model model,
+                                Authentication authentication){
         //load all the user contacts
        String username =  Helper.getEmailOfLoggedInUser(authentication);
 
        User user = userService.getUserByEmail(username);
-        List<Contact> contacts = contactService.getByUser(user);
+        Page<Contact> contacts = contactService.getByUser(user,page,size,sortBy,direction);
 
         model.addAttribute("contacts",contacts);
         return "user/contacts";
