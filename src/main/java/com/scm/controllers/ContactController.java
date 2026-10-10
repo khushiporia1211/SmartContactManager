@@ -119,7 +119,7 @@ public class ContactController {
     //view contacts
     @RequestMapping()
     public String viewContacts(@RequestParam(value = "page",defaultValue = "0") int page,
-                                @RequestParam(value = "size",defaultValue = "10") int size,
+                                @RequestParam(value = "size",defaultValue=AppConstants.PAGE_SIZE+"") int size,
                                 @RequestParam(value = "sortBy",defaultValue = "name") String sortBy,
                                 @RequestParam(value = "direction",defaultValue = "asc") String direction, 
                                 Model model,
@@ -134,5 +134,15 @@ public class ContactController {
         model.addAttribute("pageSize",AppConstants.PAGE_SIZE);
         return "user/contacts";
 
+    }
+
+    // serach handler
+    @RequestMapping("/search")
+    public String searchHandler(
+        @RequestParam("field") String field,
+        @RequestParam("keyword") String value
+    ){
+        logger.info("field {} keyword {}",field,value);
+        return "user/search";
     }
 }
