@@ -140,9 +140,32 @@ public class ContactController {
     @RequestMapping("/search")
     public String searchHandler(
         @RequestParam("field") String field,
-        @RequestParam("keyword") String value
+        @RequestParam("keyword") String value,
+        @RequestParam(value = "size",defaultValue = AppConstants.PAGE_SIZE+"") int size,
+        @RequestParam(value = "page",defaultValue = "0") int page,
+        @RequestParam(value = "sortBy",defaultValue = "name") String sortBy,
+        @RequestParam(value = "direction",defaultValue = "asc") String direction,
+        Model model
     ){
         logger.info("field {} keyword {}",field,value);
+
+
+
+        Page<Contact> pageContact =null;
+        if(field.equalsIgnoreCase("name")){
+            pageContact = contactService.searchByName(value, size,page,sortBy,direction);
+        }
+        else if(field.equalsIgnoreCase("email")){
+            pageContact = contactService.searchByEmail(value, size,page,sortBy,direction);
+        }
+        else if(field.equalsIgnoreCase("phone")){
+            pageContact = contactService.searchByPhoneNumber(value, size,page,sortBy,direction);
+        }
+
+        logger.info("contacts {}",pageContact);
+
+        model.addAttribute("contacts",pageContact);
+
         return "user/search";
     }
 }

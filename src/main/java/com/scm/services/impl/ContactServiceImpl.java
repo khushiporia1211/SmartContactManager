@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Service;
@@ -54,13 +54,7 @@ public class ContactServiceImpl implements ContactService {
        
     }
 
-    @Override
-    public List<Contact> search(String name, String email, String phoneNumber) {
-        return null;
-        
-         
-    }
-
+   
     @Override
     public List<Contact> getByUserId(String userId) {
        return repo.findByUserId(userId);
@@ -76,5 +70,29 @@ public class ContactServiceImpl implements ContactService {
      var pageable = PageRequest.of(page, size, sort); // or page - 1 if UI uses 1-based pagination
     return repo.findByUser(user, pageable);
 }
+
+    @Override
+    public Page<Contact> searchByName(String nameKeyword, int size, int page, String sortBy, String order) {
+       Sort sort = order.equals("desc")? Sort.by(sortBy).descending():Sort.by(sortBy).ascending();
+        var pageable = PageRequest.of(page, size,sort);
+        return repo.findByNameContaining(nameKeyword,pageable);
+    }
+
+    @Override
+    public Page<Contact> searchByEmail(String emailKeyword, int size, int page, String sortBy, String order) {
+        Sort sort = order.equals("desc")? Sort.by(sortBy).descending():Sort.by(sortBy).ascending();
+        var pageable = PageRequest.of(page, size,sort);
+        return repo.findByEmailContaining(emailKeyword,pageable);
+    }
+
+    @Override
+    public Page<Contact> searchByPhoneNumber(String phoneNumberKeyword, int size, int page, String sortBy,
+            String order) {
+        Sort sort = order.equals("desc")? Sort.by(sortBy).descending():Sort.by(sortBy).ascending();
+        var pageable = PageRequest.of(page, size,sort);
+        return repo.findByPhoneNumberContaining(phoneNumberKeyword,pageable);
+    }
+
+  
 
 }
