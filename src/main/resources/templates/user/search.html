@@ -23,7 +23,7 @@
 
                     <div class="relative bg-white  overflow-x-autoshadow-xs rounded-base border border-default">
 
-                        <form data-th-action="@{'/user/contacts/search'}">
+                        <form data-th-object="${contactSearchForm}" data-th-action="@{'/user/contacts/search'}">
 
                             <div
                                 class="flex space-x-3 p-5 items-center justify-start flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 p-4">
@@ -33,10 +33,11 @@
 
                                 <div class="w-48">
                                     <select 
-                                        name="field"
+                                        data-th-field="*{field}"
+                                       
                                         id="countries_disabled"
                                         class="block w-full bg-gray-50 border border-gray-300text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs text-fg-enabled">
-                                        <option selected>Select Field </option>
+                                        <option selected value="">Select Field </option>
                                         <option value="name">Name</option>
                                         <option value="phone">Phone</option>
                                         <option value="email">Email</option>
@@ -55,7 +56,7 @@
                                         </svg>
                                     </div>
                                     <input 
-                                        name="keyword"
+                                       data-th-field="*{value}"
                                         type="text" id="input-group-1"
                                         class="block w-full max-w-96 ps-9 pe-3 py-2  border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                                         placeholder="Search">
@@ -140,13 +141,13 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="flex -space-x-px text-sm">
                                     <li data-th-unless="${contacts.first}">
-                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page='+${contacts.number-1}}"
+                                        <a data-th-href="@{'/user/contacts/search?size='+${pageSize}+'&page='+${contacts.number-1}+'&field='+${contactSearchForm.field}+'&value='+${contactSearchForm.value}}"
                                             class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-s-base text-sm px-3 h-10 focus:outline-none">Previous</a>
                                     </li>
                                     <li data-th-each="index : ${#numbers.sequence(0,contacts.totalPages-1)}">
 
                                         <a data-th-classappend="${index == contacts.number} ? 'bg-blue-100 text-heading' : ''"
-                                            data-th-href="@{'/user/contacts?size='+${pageSize}+'&page=' + ${index}}"
+                                            data-th-href="@{'/user/contacts/search?size='+${pageSize}+'&page=' + ${index}+'&field='+${contactSearchForm.field}+'&value='+${contactSearchForm.value}}"
                                             class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-10 h-10 focus:outline-none">
                                             <span data-th-text="${index + 1}"></span>
                                         </a>
@@ -154,7 +155,7 @@
                                     </li>
 
                                     <li data-th-unless="${contacts.last}">
-                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page='+${contacts.number+1}}"
+                                        <a data-th-href="@{'/user/contacts/search?size='+${pageSize}+'&page='+${contacts.number+1}+'&field='+${contactSearchForm.field}+'&value='+${contactSearchForm.value}}"
                                             class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-e-base text-sm px-3 h-10 focus:outline-none">Next</a>
                                     </li>
                                 </ul>

@@ -21,8 +21,12 @@ import com.scm.services.UserService;
 public class UserController {
 
       private Logger logger = LoggerFactory.getLogger(this.getClass());
-      @Autowired 
-      private UserService userService;
+      private final UserService userService;
+
+
+      UserController(UserService userService) {
+            this.userService = userService;
+      }
 
       
       // user dashboard page
