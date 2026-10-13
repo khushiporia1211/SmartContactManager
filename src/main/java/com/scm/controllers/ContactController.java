@@ -168,6 +168,7 @@ public class ContactController {
         model.addAttribute("contactSearchForm",contactSearchForm);
 
         model.addAttribute("contacts",pageContact);
+        model.addAttribute("pageSize",AppConstants.PAGE_SIZE);
 
         return "user/search";
     }

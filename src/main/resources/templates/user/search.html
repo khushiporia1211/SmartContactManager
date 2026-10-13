@@ -14,8 +14,8 @@
         <div  class="sm:pl-64 pt-20" style="height: 1000px">
             <div class="flex justify-center flex-col items-center">
 
-        <h1 class="text-5xl">Welcome to contact page</h1>
-            <p>Lorem ipsum dolor,icitatum provident sapiente ex maxime odio, a amet repellendus inventore?</p>
+        <h1 class="text-5xl">Search Results</h1>
+            <p data-th-text="${contacts.totalElements}+' results found'">Lorem ipsum dolor,icitatum provident sapiente ex maxime odio, a amet repellendus inventore?</p>
         </div>
         
         <div class="contact_container p-5">
@@ -65,7 +65,9 @@
                             </div>
                         </form>
 
-                        <table class="w-full text-sm text-left rtl:text-right text-body">
+                        <table 
+                            data-th-unless="${contacts.empty}"
+                            class="w-full text-sm text-left rtl:text-right text-body">
                             <thead class="text-sm text-body  border-b border-t border-default-medium">
                                 <tr>
 
@@ -137,7 +139,8 @@
                             </tbody>
                         </table>
                         <!-- //pagination component -->
-                        <div class="pagination_container p-5 flex items-center justify-center">
+                        <div  data-th-unless="${contacts.empty}"
+                            class="pagination_container p-5 flex items-center justify-center">
                             <nav aria-label="Page navigation example">
                                 <ul class="flex -space-x-px text-sm">
                                     <li data-th-unless="${contacts.first}">
@@ -161,6 +164,7 @@
                                 </ul>
                             </nav>
                         </div>
+                        <h1 class="text-5xl text-center bg-white p-4" data-th-if="${contacts.empty}">No contacts found</h1>
                     </div>
 
                 </div>

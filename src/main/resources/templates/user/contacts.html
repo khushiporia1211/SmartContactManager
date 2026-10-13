@@ -70,7 +70,9 @@
                             </div>
                         </form>
 
-                        <table class="w-full text-sm text-left rtl:text-right text-body">
+                        <table 
+                            data-th-unless="${contacts.empty}"
+                            class="w-full text-sm text-left rtl:text-right text-body">
                             <thead class="text-sm text-body  border-b border-t border-default-medium">
                                 <tr>
 
@@ -142,7 +144,8 @@
                             </tbody>
                         </table>
                         <!-- //pagination component -->
-                        <div class="pagination_container p-5 flex items-center justify-center">
+                        <div  data-th-unless="${contacts.empty}"
+                            class="pagination_container p-5 flex items-center justify-center">
                             <nav aria-label="Page navigation example">
                                 <ul class="flex -space-x-px text-sm">
                                     <li data-th-unless="${contacts.first}">
@@ -166,6 +169,7 @@
                                 </ul>
                             </nav>
                         </div>
+                         <h1 class="text-5xl text-center bg-white p-4" data-th-if="${contacts.empty}">No contacts found</h1>
                     </div>
 
                 </div>
