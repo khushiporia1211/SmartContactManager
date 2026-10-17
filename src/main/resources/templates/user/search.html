@@ -129,9 +129,9 @@
                                                 <i class="w-6 h-6 fa-solid fa-pen"></i>
                                             </a>
 
-                                            <a class="p-2 ">
+                                            <button th:onclick="loadContactData([[${c.id}]])">
                                                 <i class="w-6 h-6 fa-regular fa-eye"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -168,8 +168,10 @@
                     </div>
 
                 </div>
+                <div data-th-replace="~{user/contact_model :: contact}"></div>
     </div>
 </div>
+<script data-th-src="@{'/js/contacts.js'}"></script>
     <script>
         console.log("this is a contact page")
     </script>

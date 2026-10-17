@@ -2,6 +2,7 @@ package com.scm.entities;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +29,6 @@ public class SocialLinks {
         private String title;
 
         @ManyToOne 
+        @JsonIgnore
        private Contact contact;
 }

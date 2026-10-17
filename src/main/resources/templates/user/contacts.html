@@ -126,7 +126,7 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <a class="p-2 ">
+                                            <a data-th-href="@{'/user/contacts/delete/'+*{id}}" class="p-2 ">
                                                 <i class="w-6 h-6 fa-solid fa-trash"></i>
                                             </a>
 
@@ -134,7 +134,8 @@
                                                 <i class="w-6 h-6 fa-solid fa-pen"></i>
                                             </a>
 
-                                            <button  onclick="openContactModel()">
+                                            <button th:data-id="${c.id}" 
+                                                    th:onclick="loadContactData(this.getAttribute('data-id'))">
                                                 <i class="w-6 h-6 fa-regular fa-eye"></i>
                                            </button>
 
