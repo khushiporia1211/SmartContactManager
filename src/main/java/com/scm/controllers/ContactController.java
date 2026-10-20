@@ -1,6 +1,6 @@
 package com.scm.controllers;
 
-import java.util.List;
+
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -176,10 +176,14 @@ public class ContactController {
 
     //delete contact
     @RequestMapping("/delete/{contactId}")
-    public String deleteContact(@PathVariable("contactId")  String contactId){
+    public String deleteContact(@PathVariable("contactId")  String contactId, HttpSession session){
 
         contactService.delete(contactId);
         logger.info("contactId {} deleted",contactId);
+        session.setAttribute("message", Message.builder()
+                                                    .content("Contact is Deleted Successfully !!")
+                                                     .type(MessageType.green)  
+                                                    .build());
         return "redirect:/user/contacts";
     }
 }

@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter 
 @Setter 
 @NoArgsConstructor 
-@AllArgsConstructor 
+@AllArgsConstructor  
 @Builder 
 public class Contact {
 
@@ -34,6 +34,7 @@ public class Contact {
     private String picture;
     @Column(length = 1000)
     private String description;
+    @Builder.Default
     private boolean favourite=false;
     private String websiteLink;
     private String linkedInLink;
@@ -45,5 +46,6 @@ public class Contact {
     private User user;
 
      @OneToMany(mappedBy = "contact",cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
+     @Builder.Default
      private List<SocialLinks> links = new ArrayList<>();
 }
