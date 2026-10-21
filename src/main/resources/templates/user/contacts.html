@@ -131,14 +131,15 @@
                                             <!-- <a data-th-href="@{'/user/contacts/delete/'+*{id}}" class="p-2 ">
                                                 <i class="w-6 h-6 fa-solid fa-trash"></i>
                                             </a> -->
+                                            <!-- delete contact -->
                                             <button  th:onclick="deleteContact([[${c.id}]])">
                                                 <i class="w-6 h-6 fa-solid fa-trash"></i>
                                             </button>
-
-                                            <a class="p-2 ">
+                                            <!-- update contact -->
+                                            <a class="p-2 " data-th-href="@{'/user/contacts/view/'+*{id}}">
                                                 <i class="w-6 h-6 fa-solid fa-pen"></i>
                                             </a>
-
+                                            <!-- view contact -->
                                             <button th:data-id="${c.id}" 
                                                     th:onclick="loadContactData(this.getAttribute('data-id'))">
                                                 <i class="w-6 h-6 fa-regular fa-eye"></i>

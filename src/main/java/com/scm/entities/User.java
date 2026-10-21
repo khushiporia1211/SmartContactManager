@@ -29,7 +29,7 @@ import lombok.Setter;
 @Table(name="users")
 @Getter 
 @Setter 
-@AllArgsConstructor 
+@AllArgsConstructor       
 @NoArgsConstructor 
 @Builder
 public class User implements UserDetails{

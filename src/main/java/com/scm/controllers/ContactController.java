@@ -6,12 +6,15 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -185,5 +188,35 @@ public class ContactController {
                                                      .type(MessageType.green)  
                                                     .build());
         return "redirect:/user/contacts";
+    }
+
+    //update contact form view
+    @GetMapping("/view/{contactId}")
+    public String updateContactView(@PathVariable ("contactId") String contactId,Model model){
+
+        var contact = contactService.getById(contactId);
+        ContactForm contactForm = new ContactForm();
+        contactForm.setName(contact.getName());
+        contactForm.setEmail(contact.getEmail());
+        contactForm.setPhoneNumber(contact.getPhoneNumber());
+        contactForm.setAddress(contact.getAddress());
+        contactForm.setDescription(contact.getDescription());
+        contactForm.setFavourite(contact.isFavourite());
+        contactForm.setWebsiteLink(contact.getWebsiteLink());
+        contactForm.setPicture(contact.getPicture());
+        contactForm.setLinkedInLink(contact.getLinkedInLink());
+
+
+        model.addAttribute("contactForm", contactForm);
+        model.addAttribute("contactId",contactId);
+        return "user/update_contact_view";
+
+    }
+    @PostMapping("/update/{contactId}")
+    public String updateContact(@PathVariable("contactid") String contactId,@ModelAttribute ContactForm contactForm,Model model){
+        //update the contact 
+        contactService.update()
+        return "redirect:/user/contacts/view/"+contactId;
+
     }
 }
